@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>One Question 💗</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow-x:hidden;
+    font-family:Arial,sans-serif;
+    color:white;
+
+    background:
+    radial-gradient(
+        circle at 50% 40%,
+        #421532 0%,
+        #180b17 45%,
+        #080509 100%
+    );
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at 15% 20%,
+        rgba(255,50,180,.13),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 85% 80%,
+        rgba(255,50,180,.10),
+        transparent 30%
+    );
+
+    pointer-events:none;
+}
+
+.card{
+    width:min(92%,480px);
+    min-height:500px;
+
+    padding:42px 28px;
+
+    border:1px solid rgba(255,80,190,.35);
+    border-radius:28px;
+
+    background:rgba(18,8,18,.82);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 0 35px rgba(255,50,180,.18),
+    inset 0 0 30px rgba(255,50,180,.04);
+
+    text-align:center;
+
+    position:relative;
+    z-index:2;
+}
+
+.heart{
+    font-size:44px;
+    margin-bottom:18px;
+
+    color:#ff4ab5;
+
+    text-shadow:0 0 18px #ff3cac;
+
+    animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(1.12);
+    }
+}
+
+h1{
+    font-size:clamp(28px,7vw,40px);
+    margin-bottom:12px;
+}
+
+.subtitle{
+    color:#c9b8c6;
+    font-size:15px;
+    margin-bottom:40px;
+}
+
+.buttons{
+    height:170px;
+    position:relative;
+    width:100%;
+}
+
+button{
+    cursor:pointer;
+    border:0;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.yes{
+    position:absolute;
+    left:50%;
+    top:25px;
+
+    transform:translateX(-115%);
+
+    padding:15px 34px;
+
+    border-radius:14px;
+
+    color:white;
+
+    background:#ff3cac;
+
+    box-shadow:
+    0 0 20px rgba(255,60,172,.65);
+
+    transition:.25s;
+}
+
+.no{
+    position:absolute;
+    left:50%;
+    top:25px;
+
+    transform:translateX(15%);
+
+    padding:15px 34px;
+
+    border-radius:14px;
+
+    color:white;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.16);
+
+    transition:.15s;
+}
+
+#hint{
+    color:#ff86cf;
+    min-height:20px;
+    font-size:13px;
+}
+
+.hidden{
+    display:none;
+}
+
+.fade{
+    animation:fade .5s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.form-title{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.form-subtitle{
+    color:#bdaeba;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    text-align:left;
+
+    margin:16px 0 7px;
+
+    font-size:14px;
+
+    color:#ddd;
+}
+
+input,
+select{
+    width:100%;
+
+    padding:15px;
+
+    border-radius:13px;
+
+    border:1px solid rgba(255,80,190,.3);
+
+    background:#160d16;
+
+    color:white;
+
+    outline:none;
+
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+    border-color:#ff3cac;
+
+    box-shadow:
+    0 0 12px rgba(255,60,172,.25);
+}
+
+.submit{
+    width:100%;
+
+    margin-top:25px;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    color:white;
+
+    background:#ff3cac;
+
+    box-shadow:
+    0 0 20px rgba(255,60,172,.5);
+
+    transition:.2s;
+}
+
+.submit:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+#result{
+    margin-top:22px;
+
+    color:#ff8bd3;
+
+    line-height:1.6;
+}
+
+.success{
+    font-size:18px;
+}
+
+
+/* ============================
+   WHATSAPP CONTACT
+============================ */
+
+.contact-box{
+    margin-top:25px;
+
+    padding-top:20px;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.10);
+}
+
+.contact-text{
+    font-size:14px;
+
+    color:#c9b8c6;
+
+    margin-bottom:12px;
+}
+
+.whatsapp-btn{
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    width:100%;
+
+    padding:15px 20px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:#25D366;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 0 20px
+    rgba(37,211,102,.35);
+
+    transition:.2s;
+}
+
+.whatsapp-btn:hover{
+    transform:scale(1.03);
+}
+
+.whatsapp-btn:active{
+    transform:scale(.97);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="card">
+
+
+<!-- ============================
+     QUESTION
+============================ -->
+
+<section id="question">
+
+    <div class="heart">
+        ♡
+    </div>
+
+    <h1>
+        Will you be my friend?
+    </h1>
+
+    <p class="subtitle">
+        Be honest... 👀
+    </p>
+
+
+    <div class="buttons">
+
+        <button
+            class="yes"
+            id="yesBtn"
+            onclick="sayYes()">
+
+            YES 💗
+
+        </button>
+
+
+        <button
+            class="no"
+            id="noBtn"
+            onclick="moveNo()">
+
+            NO
+
+        </button>
+
+    </div>
+
+
+    <p id="hint"></p>
+
+</section>
+
+
+
+<!-- ============================
+     MEETING FORM
+============================ -->
+
+<section
+    id="meeting"
+    class="hidden">
+
+
+    <div class="heart">
+        ✦
+    </div>
+
+
+    <h2 class="form-title">
+        Okay... you're my friend now. 😌
+    </h2>
+
+
+    <p class="form-subtitle">
+        So... when can we meet?
+    </p>
+
+
+    <label for="date">
+        Pick a date
+    </label>
+
+
+    <input
+        type="date"
+        id="date">
+
+
+
+    <label for="place">
+        Pick a place
+    </label>
+
+
+    <select id="place">
+
+        <option value="">
+            Choose a place...
+        </option>
+
+
+        <optgroup label="Koshi Province">
+
+            <option value="Biratnagar">
+                Biratnagar
+            </option>
+
+            <option value="Dharan">
+                Dharan
+            </option>
+
+            <option value="Itahari">
+                Itahari
+            </option>
+
+            <option value="Dhankuta">
+                Dhankuta
+            </option>
+
+            <option value="Illam">
+                Illam
+            </option>
+
+            <option value="Mechinagar">
+                Mechinagar
+            </option>
+
+        </optgroup>
+
+
+        <optgroup label="Bagmati Province">
+
+            <option value="Kathmandu">
+                Kathmandu
+            </option>
+
+            <option value="Lalitpur">
+                Lalitpur
+            </option>
+
+            <option value="Bhaktapur">
+                Bhaktapur
+            </option>
+
+            <option value="Nagarkot">
+                Nagarkot
+            </option>
+
+            <option value="Chitwan">
+                Chitwan
+            </option>
+
+            <option value="Hetauda">
+                Hetauda
+            </option>
+
+        </optgroup>
+
+
+        <optgroup label="Gandaki Province">
+
+            <option value="Pokhara">
+                Pokhara
+            </option>
+
+            <option value="Bandipur">
+                Bandipur
+            </option>
+
+            <option value="Ghandruk">
+                Ghandruk
+            </option>
+
+        </optgroup>
+
+
+        <optgroup label="Lumbini Province">
+
+            <option value="Butwal">
+                Butwal
+            </option>
+
+            <option value="Lumbini">
+                Lumbini
+            </option>
+
+            <option value="Tansen">
+                Tansen
+            </option>
+
+        </optgroup>
+
+
+        <optgroup label="Madhesh Province">
+
+            <option value="Janakpur">
+                Janakpur
+            </option>
+
+            <option value="Birgunj">
+                Birgunj
+            </option>
+
+        </optgroup>
+
+
+        <optgroup label="Karnali Province">
+
+            <option value="Surkhet">
+                Surkhet
+            </option>
+
+        </optgroup>
+
+
+        <optgroup label="Sudurpashchim Province">
+
+            <option value="Dhangadhi">
+                Dhangadhi
+            </option>
+
+        </optgroup>
+
+
+        <option value="Other place in Nepal">
+            Other place in Nepal
+        </option>
+
+    </select>
+
+
+
+    <button
+        class="submit"
+        id="submitBtn"
+        onclick="submitAnswer()">
+
+        Confirm ✨
+
+    </button>
+
+
+    <div id="result"></div>
+
+
+</section>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================
+   GOOGLE APPS SCRIPT URL
+===================================== */
+
+const BACKEND_URL =
+"https://script.google.com/macros/s/AKfycbxPEwB_y0loYctJmmIjseo2qIf469bWDXBXLEqfJH4AztkYW1IqKxc5mu-1n9UVlz0k/exec";
+
+
+/* =====================================
+   REAL WHATSAPP NUMBER
+===================================== */
+
+const WHATSAPP_URL =
+"https://wa.me/9779713592035";
+
+
+/* =====================================
+   VARIABLES
+===================================== */
+
+let noClicks = 0;
+
+let yesScale = 1;
+
+
+const noBtn =
+document.getElementById("noBtn");
+
+
+const yesBtn =
+document.getElementById("yesBtn");
+
+
+const hint =
+document.getElementById("hint");
+
+
+const submitBtn =
+document.getElementById("submitBtn");
+
+
+/* =====================================
+   MOVING NO BUTTON
+===================================== */
+
+function moveNo(){
+
+    noClicks++;
+
+    yesScale += 0.18;
+
+
+    yesBtn.style.transform =
+        `translateX(-115%) scale(${yesScale})`;
+
+
+    const messages = [
+
+        "Are you sure? 👀",
+
+        "Try again 😂",
+
+        "That button is running away...",
+
+        "Nice try 😭",
+
+        "YES is looking better now...",
+
+        "You can't escape forever 😂",
+
+        "Just press YES already 💗"
+
+    ];
+
+
+    hint.innerText =
+        messages[
+            Math.min(
+                noClicks - 1,
+                messages.length - 1
+            )
+        ];
+
+
+    const area =
+        document.querySelector(".buttons");
+
+
+    const maxX =
+        Math.max(
+            0,
+            area.clientWidth -
+            noBtn.offsetWidth
+        );
+
+
+    const maxY =
+        Math.max(
+            0,
+            area.clientHeight -
+            noBtn.offsetHeight
+        );
+
+
+    const x =
+        Math.random() * maxX;
+
+
+    const y =
+        Math.random() * maxY;
+
+
+    noBtn.style.left =
+        x + "px";
+
+
+    noBtn.style.top =
+        y + "px";
+
+
+    noBtn.style.transform =
+        "none";
+}
+
+
+/* =====================================
+   YES
+===================================== */
+
+function sayYes(){
+
+    document
+        .getElementById("question")
+        .classList
+        .add("hidden");
+
+
+    const meeting =
+        document.getElementById("meeting");
+
+
+    meeting
+        .classList
+        .remove("hidden");
+
+
+    meeting
+        .classList
+        .add("fade");
+
+
+    const today =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+    document
+        .getElementById("date")
+        .min = today;
+}
+
+
+/* =====================================
+   SUBMIT TO GOOGLE SHEET
+===================================== */
+
+async function submitAnswer(){
+
+    const date =
+        document
+        .getElementById("date")
+        .value;
+
+
+    const place =
+        document
+        .getElementById("place")
+        .value;
+
+
+    const result =
+        document
+        .getElementById("result");
+
+
+    if(!date || !place){
+
+        result.innerHTML =
+            "Choose both a date and place first 😭";
+
+        return;
+    }
+
+
+    submitBtn.disabled = true;
+
+    submitBtn.innerText =
+        "Sending... 💗";
+
+
+    result.innerHTML =
+        "Saving your plan... 💗";
+
+
+    const data = {
+
+        answer:"YES",
+
+        noAttempts:noClicks,
+
+        date:date,
+
+        place:place,
+
+        time:
+            new Date().toISOString()
+
+    };
+
+
+    try{
+
+        await fetch(
+
+            BACKEND_URL,
+
+            {
+
+                method:"POST",
+
+                mode:"no-cors",
+
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                    JSON.stringify(data)
+
+            }
+
+        );
+
+
+        const formatted =
+            new Date(
+                date + "T00:00:00"
+            )
+            .toLocaleDateString(
+
+                "en-US",
+
+                {
+
+                    weekday:"long",
+
+                    year:"numeric",
+
+                    month:"long",
+
+                    day:"numeric"
+
+                }
+
+            );
+
+
+        /* =================================
+           SUCCESS + CONTACT BUTTON
+        ================================= */
+
+        result.innerHTML = `
+
+            <div class="success">
+
+                It's a plan then. 💗
+
+                <br><br>
+
+                📅 ${formatted}
+
+                <br>
+
+                📍 ${place}
+
+                <br><br>
+
+                <b>
+                    See you there, bestie. ✨
+                </b>
+
+
+                <div class="contact-box">
+
+                    <div class="contact-text">
+
+                        Can be contacted by clicking here 💬
+
+                    </div>
+
+
+                    <a
+                        class="whatsapp-btn"
+                        href="${WHATSAPP_URL}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        💬 Contact Me on WhatsApp
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        submitBtn.innerText =
+            "Confirmed ✓";
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        result.innerHTML =
+            "Something went wrong. Please try again.";
+
+
+        submitBtn.disabled =
+            false;
+
+
+        submitBtn.innerText =
+            "Confirm ✨";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
